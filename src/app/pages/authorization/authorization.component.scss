@@ -1,0 +1,15 @@
+:host {
+  form {
+    margin-top: 100px;
+    .row {
+      margin-bottom: 8px;
+    }
+  }
+
+  input.ng-invalid.ng-touched {
+    background: #f5c6cb;
+  }
+  .error {
+    color: #f5c6cb;
+  }
+}

@@ -1,0 +1,7 @@
+<app-navigation></app-navigation>
+<form [formGroup]="searchForm" (ngSubmit)="search()" class="d-flex p-2 bd-highlight">
+    <input formControlName="substring"
+            class="form-control"
+            placeholder="Давай найдём что-нибудь">
+    <button type="submit" class="btn btn-outline-success">Найти</button>
+</form>

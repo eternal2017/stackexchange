@@ -1,0 +1,63 @@
+<app-navigation></app-navigation>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">
+                        Автор
+                        <ng-container *ngIf="sortType.sortField === SortField.Owner">
+                           <ng-template [ngTemplateOutlet]="row"></ng-template>
+                        </ng-container>
+                    </th>
+                    <th scope="col">Тема</th>
+                    <th scope="col" (click)="sortAnswer()">
+                        Количество ответов
+                        <ng-container *ngIf="sortType.sortField === SortField.Answer">
+                            <ng-template [ngTemplateOutlet]="row"></ng-template>
+                        </ng-container>
+                    </th>
+                    <th scope="col">Теги</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let question of questions; index as i">
+                    <th scope="row">{{ i }}</th>
+                    <td (click)="initQuickViewOfOwner(question.owner.user_id, question.owner.display_name)"
+                        class="cursor-pointer">
+                        {{ question.owner.display_name }}
+                    </td>
+                    <td [routerLink]="['/question', question.question_id]">{{ question.title }}</td>
+                    <td [routerLink]="['/question', question.question_id]">{{ question.answer_count }}</td>
+                    <td>
+                        <ng-container *ngFor="let tag of question.tags; last as isLast">
+                            <span (click)="initQuickViewOfTag(tag)" class="cursor-pointer">{{ tag }}</span>
+                            <ng-container *ngIf="!isLast">,</ng-container>
+                        </ng-container>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="isOpenQuickView" class="col">
+            <ng-container [ngSwitch]="quickView">
+                <app-owner-quick-view *ngSwitchCase="QuickViewType.Owner"
+                                      [userId]="quickViewUserId"
+                                      [name]="quickViewName"></app-owner-quick-view>
+                <app-tag-quick-view *ngSwitchCase="QuickViewType.Tag"
+                                    [tag]="quickViewTag"></app-tag-quick-view>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<ng-template #row>
+    <svg *ngIf="sortType.desk === false; else desk"
+         (click)="sort()"
+         class="octicon octicon-chevron-down" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6l-5 5z"></path></svg>
+    <ng-template #desk>
+        <svg (click)="sort()" class="octicon octicon-chevron-up" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5 5 5z"></path></svg>
+    </ng-template>
+</ng-template>

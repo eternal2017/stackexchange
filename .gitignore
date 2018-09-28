@@ -1,0 +1,45 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# local config
+proxy.conf.json
+proxy.conf.*.json
+!proxy.conf.example.json
+config/nginx.conf
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+/assets/sprites
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.idea/workspace.xml
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# system specific
+.idea/typescript-compiler.xml

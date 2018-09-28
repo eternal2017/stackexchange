@@ -1,0 +1,17 @@
+<div>Популярные вопросы автора: {{ name }}</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Тема</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let question of questions; index as i">
+        <th scope="row">{{ i }}</th>
+        <td>
+            <a target="_blank" href="{{ question.link }}">{{ question.title }}</a>
+        </td>
+    </tr>
+    </tbody>
+</table>

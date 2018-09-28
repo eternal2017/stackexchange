@@ -1,0 +1,22 @@
+<form [formGroup]="authenticateForm" (ngSubmit)="authentication()" class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-3">
+            <input formControlName="login"
+                   class="form-control"
+                   placeholder="Логин">
+            <div *ngIf="isInvalidControl('login')" class="error">Минимум 5 символов</div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-3">
+            <input formControlName="password"
+                   class="form-control"
+                   placeholder="Пароль"
+                   type="password">
+            <div *ngIf="isInvalidControl('password')" class="error">Минимум 5 символов</div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <button type="submit" class="col-2 btn btn-outline-success">Войти</button>
+    </div>
+</form>
