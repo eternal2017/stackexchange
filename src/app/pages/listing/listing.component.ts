@@ -40,7 +40,7 @@ export class ListingComponent implements OnInit, OnDestroy {
     public readonly SortField = SortField;
     public sortType: SortType = {
         sortField: SortField.Answer,
-        desk: true,
+        desk: false,
     };
 
     private paramsSubsciption: Subscription;
@@ -50,8 +50,10 @@ export class ListingComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.paramsSubsciption = this.activatedRoute.queryParams.subscribe(params =>
-            this.search(params['substring']));
+        this.paramsSubsciption = this.activatedRoute.queryParams.subscribe(async (params) => {
+            await this.search(params['substring']);
+            this.sortByTitle();
+        });
     }
 
     ngOnDestroy() {
@@ -75,25 +77,34 @@ export class ListingComponent implements OnInit, OnDestroy {
         this.quickViewTag = tag;
     }
 
-    public sort (): void {
-        switch(this.sortType.sortField) {
-            case SortField.Answer:
-                // this.questions = this.sortAnswer(this.questions);
-                break;
-            case SortField.Owner:
-                break;
-        }
+
+    public sortByTitle (): void {
+        const step = this.sortType.desk ? -1 : 1;
+        this.questions.sort((currentQuestion, nextQuestion) => {
+            if (currentQuestion.title[0] < nextQuestion.title[0]) {
+                return -step;
+            }
+            if (currentQuestion.title[0] > nextQuestion.title[0]) {
+                return step;
+            }
+            return 0
+        });
+        this.sortType.sortField = SortField.Owner;
+        this.sortType.desk = !this.sortType.desk;
     }
 
-    public sortAnswer (questions: SearchedItem[]): SearchedItem[] {
-        return this.questions.sort((currentQuestion, nextQuestion) => {
-            if (currentQuestion.answerCount > nextQuestion.answerCount) {
-                return 1;
+    public sortByAnswer (): void {
+        const step = this.sortType.desk ? -1 : 1;
+        this.questions.sort((currentQuestion, nextQuestion) => {
+            if (currentQuestion.answer_count < nextQuestion.answer_count) {
+                return -step;
             }
-            if (currentQuestion.answerCount < nextQuestion.answerCount) {
-                return -1
+            if (currentQuestion.answer_count > nextQuestion.answer_count) {
+                return step;
             }
-            return 0;
+            return 0
         });
+        this.sortType.sortField = SortField.Answer;
+        this.sortType.desk = !this.sortType.desk;
     }
 }

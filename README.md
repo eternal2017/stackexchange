@@ -1,11 +1,34 @@
-Данные приложения:
-CLIENT_ID = 13160
-CLIENT_SECRET = 'u*RHXMVZ2lgcyo9ePf2)mg(('
-KEY = 'w7)cIvGyQLx4QjgwpnLsJg(('
-REDIRECT_URI = 'http://localhost:8080'
-ACCESS_TOCKEN = 'lmDeUyPFi1oifsGHEE8wjw))'
+Необходимое ПО: nodejs v8.4.0, npm 5.30
+
+
+Инструкция по запуску:
+
+0. Ставим зависимости
+
+в корне проекта запускаем
+
+:~$ npm i
+
+1. Запускаем сервер
+
+переходим из корня проекта в папку сервер запускаем
+
+:~$ node index.js
+
+2. Собираем приложение
+
+в корне проекта запускаем:
+
+:~$ npm run dev
+
 
 3 пользователя, логин и пароль соответственно:
+
 test1 password1
+
 test2 password2
+
 test3 password3
+
+
+управление навигацией стрелками влево, вправо

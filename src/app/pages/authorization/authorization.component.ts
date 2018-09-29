@@ -11,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AuthorizationComponent {
 
     readonly DefaultLoginAndPasswordLength = 5;
-    public authenticateForm = new FormGroup({
+    public authenticationForm = new FormGroup({
         "login": new FormControl('', [Validators.required, Validators.minLength(this.DefaultLoginAndPasswordLength)]),
         "password": new FormControl('', [Validators.required, Validators.minLength(this.DefaultLoginAndPasswordLength)]),
     });
@@ -22,13 +22,13 @@ export class AuthorizationComponent {
 
     public async authentication(): Promise<void> {
 
-        if (this.authenticateForm.invalid) {
+        if (this.authenticationForm.invalid) {
             return;
         }
 
         const authentificationBody: AuthentificationBody = {
-            login: this.authenticateForm.value.login,
-            password: this.authenticateForm.value.password,
+            login: this.authenticationForm.value.login,
+            password: this.authenticationForm.value.password,
         };
 
         try {
@@ -46,7 +46,7 @@ export class AuthorizationComponent {
     }
 
     public isInvalidControl (controlName: string): boolean {
-        const control = this.authenticateForm.controls[controlName];
+        const control = this.authenticationForm.controls[controlName];
         return control.invalid && control.touched;
     }
 }

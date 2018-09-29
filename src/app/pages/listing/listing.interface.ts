@@ -6,7 +6,7 @@ export interface SearchedItem {
     question_id: string;
     owner: Owner;
     title: string;
-    answerCount: number;
+    answer_count: number;
     tags: string[];
 }
 

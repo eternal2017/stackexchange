@@ -1,5 +1,5 @@
 <app-navigation></app-navigation>
-<div class="container-fluid">
+<div class="container-fluid" [@visibilityChanged]="isVisible">
     <div class="row">
         <div class="col">
             <table class="table">
@@ -8,12 +8,14 @@
                     <th scope="col">#</th>
                     <th scope="col">
                         Автор
+                    </th>
+                    <th scope="col"  (click)="sortByTitle()">
+                        Тема
                         <ng-container *ngIf="sortType.sortField === SortField.Owner">
-                           <ng-template [ngTemplateOutlet]="row"></ng-template>
+                            <ng-template [ngTemplateOutlet]="row"></ng-template>
                         </ng-container>
                     </th>
-                    <th scope="col">Тема</th>
-                    <th scope="col" (click)="sortAnswer()">
+                    <th scope="col" (click)="sortByAnswer()">
                         Количество ответов
                         <ng-container *ngIf="sortType.sortField === SortField.Answer">
                             <ng-template [ngTemplateOutlet]="row"></ng-template>
@@ -54,10 +56,9 @@
 </div>
 
 <ng-template #row>
-    <svg *ngIf="sortType.desk === false; else desk"
-         (click)="sort()"
+    <svg *ngIf="sortType.desk; else ask"
          class="octicon octicon-chevron-down" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6l-5 5z"></path></svg>
-    <ng-template #desk>
-        <svg (click)="sort()" class="octicon octicon-chevron-up" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5 5 5z"></path></svg>
+    <ng-template #ask>
+        <svg class="octicon octicon-chevron-up" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5 5 5z"></path></svg>
     </ng-template>
 </ng-template>

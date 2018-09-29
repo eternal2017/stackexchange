@@ -14,6 +14,7 @@ import { QuestionComponent } from './pages/question/question.component';
 import { OwnerQuickViewComponent } from './pages/listing/owner-quick-view/owner-quick-view.component';
 import { TagQuickViewComponent } from './pages/listing/tag-quick-view/tag-quick-view.component';
 import { AuthenticationService } from './servicies/authentication.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { AuthenticationService } from './servicies/authentication.service';
         FormsModule,
         HttpClientModule,
         ReactiveFormsModule,
+        BrowserAnimationsModule,
 
         RouterModule.forRoot([
             {

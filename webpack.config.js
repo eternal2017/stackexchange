@@ -9,7 +9,7 @@ module.exports = {
         'app': './src/main.ts'
     },
     output:{
-        path: path.resolve(__dirname, 'dist'),     // путь к каталогу выходных файлов - папка public
+        path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
         filename: '[name].[hash].js'
     },
@@ -20,9 +20,9 @@ module.exports = {
         extensions: ['.ts', '.js']
     },
     module:{
-        rules:[   //загрузчик для ts
+        rules:[
             {
-                test: /\.ts$/, // определяем тип файлов
+                test: /\.ts$/,
                 use: [
                     {
                         loader: 'awesome-typescript-loader',
@@ -44,11 +44,6 @@ module.exports = {
                     "css-loader"
                 ]
             },
-            // {
-            //     test: /\.css$/,
-            //     include: path.resolve(__dirname, 'src/app'),
-            //     loader: 'raw-loader'
-            // },
             {
                 test: /\.(css|scss)$/,
                 use: [
@@ -56,15 +51,15 @@ module.exports = {
                         loader: 'to-string-loader'
                     },
                     {
-                        loader: 'style-loader', // inject CSS to page
+                        loader: 'style-loader',
                     },
                     {
-                        loader: 'css-loader', // translates CSS into CommonJS modules
+                        loader: 'css-loader',
                     },
                     {
-                        loader: 'postcss-loader', // Run post css actions
+                        loader: 'postcss-loader',
                         options: {
-                            plugins: function () { // post css plugins, can be exported to postcss.config.js
+                            plugins: function () {
                                 return [
                                     require('precss'),
                                     require('autoprefixer')
@@ -73,7 +68,7 @@ module.exports = {
                         }
                     },
                     {
-                        loader: 'sass-loader' // compiles Sass to CSS
+                        loader: 'sass-loader'
                     }
                 ]
             },
@@ -82,8 +77,8 @@ module.exports = {
     plugins: [
         new webpack.ContextReplacementPlugin(
             /angular(\|\/)core/,
-            path.resolve(__dirname, 'src'), // каталог с исходными файлами
-            {} // карта маршрутов
+            path.resolve(__dirname, 'src'),
+            {}
         ),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
